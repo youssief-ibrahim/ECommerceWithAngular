@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -17,7 +18,7 @@ export class Login {
   private readonly _AuthService=inject(AuthService);
   private readonly _FormBuilder =inject(FormBuilder);
   private readonly _Router =inject(Router);
-  
+  loginSubscribe!:Subscription
   msMessage:string="";
   msSusses:boolean=false;
   isloading:boolean=false;
@@ -38,7 +39,7 @@ export class Login {
   if (this.loginform.valid) {
 
     this.isloading=true;
-    this._AuthService.setloginform(this.loginform.value).subscribe({
+    this.loginSubscribe=this._AuthService.setloginform(this.loginform.value).subscribe({
       next: (res) => {
         if(res.message=='success')
         {
@@ -61,6 +62,12 @@ export class Login {
   else{
     this.loginform.markAllAsTouched()
   }
+}
+
+ngOnDestroy(): void {
+  //Called once, before the instance is destroyed.
+  //Add 'implements OnDestroy' to the class.
+  this.loginSubscribe?.unsubscribe();
 }
 
 

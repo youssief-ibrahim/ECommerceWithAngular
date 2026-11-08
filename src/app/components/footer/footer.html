@@ -1,37 +1,160 @@
-<footer class="bg-main-light py-5">
-  <div class="container">
-    <h2 class="m-0 h4">Get The FreshCart App</h2>
-    <p class="text-muted small">
-      We Will Send You a Link, Open it on Your Phone to download the app
-    </p>
 
-    <!-- inputs design  -->
-    <div class="d-flex align-items-center gap-3 text-nowrap">
-      <input type="text" class="form-control" placeholder="Email" />
-      <button class="btn-main">Share App Link</button>
-    </div>
+<footer class="main-footer text-white">
 
-    <hr />
+  <div class="container py-5">
+    <div class="row g-5">
 
-    <!-- footer payment Details Design  -->
-    <div class="pay-details d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center gap-2">
-        <h3 class="h6 m-0">Payment partners</h3>
-        <img src="./images/amazon-pay.png" width="30px" alt="" />
-        <img
-          src="./images/American-Express-Color.png"
-          width="30px"
-          alt=""
-        />
-        <img src="./images/paypal.png" width="30px" alt="" />
-        <img src="./images/mastercard.webp" width="30px" alt="" />
+      <!-- Brand & Contact -->
+      <div class="col-12 col-md-6 col-lg-4">
+
+        <a routerLink="/" class="footer-logo d-inline-block mb-4">
+          <div class="bg-white rounded-3 px-4 py-2">
+            <img src="images/freshcart-logo.svg"
+                 alt="FreshCart Logo"
+                 height="32">
+          </div>
+        </a>
+
+        <p class="footer-text mb-4">
+          FreshCart is your one-stop destination for quality products.
+          From fashion to electronics, we bring you the best brands
+          at competitive prices.
+        </p>
+
+        <!-- Contact Info -->
+        <div class="d-flex flex-column gap-3 mb-4">
+
+          <a href="tel:+18001234567" class="footer-contact">
+            <span class="contact-icon">
+              <i class="fa-solid fa-phone"></i>
+            </span>
+            <span>+1 (800) 123-4567</span>
+          </a>
+
+          <a href="mailto:support@freshcart.com" class="footer-contact">
+            <span class="contact-icon">
+              <i class="fa-solid fa-envelope"></i>
+            </span>
+            <span>support@freshcart.com</span>
+          </a>
+
+          <div class="footer-contact">
+            <span class="contact-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </span>
+            <span>123 Commerce Street, New York, NY 10001</span>
+          </div>
+
+        </div>
+
+        <!-- Social Media -->
+        <div class="d-flex gap-3">
+
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+          <a href="#" class="social-link">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+
+        </div>
+
+      </div>
+      
+
+      <!-- Shop -->
+      <div class="chcr col-6 col-md-3 col-lg-2">
+
+        <h3 class="footer-title">Shop</h3>
+
+        <ul class="list-unstyled footer-links">
+          <li><a routerLink="/products">All Products</a></li>
+          <li><a routerLink="/categories">Categories</a></li>
+          <li><a routerLink="/brands">Brands</a></li>
+        </ul>
+
       </div>
 
-      <div class="d-flex align-items-center gap-2">
-        <h3 class="h6 m-0">Get Deliveries with FreshCart</h3>
-        <img src="./images/get-google-play.png" width="75px" alt="" />
-        <img src="./images/get-aapple-store.png" width="75px" alt="" />
+      <!-- Account -->
+      <div class=" chcr col-6 col-md-3 col-lg-2">
+
+        <h3 class="footer-title">Account</h3>
+
+        <ul class="list-unstyled footer-links">
+          <li><a routerLink="/profile">My Account</a></li>
+          <li><a routerLink="/wishlist">Wishlist</a></li>
+          <li><a routerLink="/cart">Shopping Cart</a></li>
+        </ul>
+
       </div>
+
+      <!-- Support -->
+      <div class="chcr col-6 col-md-3 col-lg-2">
+
+        <h3 class="footer-title">Support</h3>
+
+        <ul class="list-unstyled footer-links">
+          <li><a routerLink="/contact">Contact Us</a></li>
+          <li><a routerLink="/help">Help Center</a></li>
+          <li><a routerLink="/returns">Returns</a></li>
+        </ul>
+
+      </div>
+
+      <!-- Legal -->
+      <div class="chcr col-6 col-md-3 col-lg-2">
+
+        <h3 class="footer-title">Legal</h3>
+
+        <ul class="list-unstyled footer-links">
+          <li><a routerLink="/privacy">Privacy Policy</a></li>
+          <li><a routerLink="/terms">Terms of Service</a></li>
+        </ul>
+
+      </div>
+
     </div>
   </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="container py-4">
+
+      <div class="row align-items-center gy-3">
+
+        <div class="col-12 col-md-8 text-center text-md-start">
+          <p class="mb-0 footer-copyright">
+            © 2026
+            <span>FreshCart</span>.
+            All rights reserved.
+            Developed by
+            <strong>Youssief Ibrahim</strong>
+          </p>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="payment-icons d-flex justify-content-center justify-content-md-end gap-3">
+
+            <i class="fa-brands fa-cc-visa"></i>
+            <i class="fa-brands fa-cc-mastercard"></i>
+            <i class="fa-brands fa-cc-paypal"></i>
+            <i class="fa-brands fa-cc-apple-pay"></i>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
 </footer>

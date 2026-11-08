@@ -43,26 +43,6 @@ a:hover {
   overflow: hidden;
 }
 
-.product:hover{
-  transform: scale(1,1)
-}
-
-.product .btn-main{
-  transform: translateY(120%);
-  opacity: 0;
-  transition: transform .7s , opacity .9s;
-
-}
-
-.product:hover .btn-main{
-  transform: translatey(0%);
-  opacity: 1;
-}
-
-
-.product:hover {
-  box-shadow: 0 0 10px #11bd1168;
-}
 
 .font-sm {
   font-size: 12px;

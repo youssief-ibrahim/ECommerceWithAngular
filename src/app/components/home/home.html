@@ -1,10 +1,12 @@
 <section>
-    <h2>Popular Products:</h2>
+    <h2 class="m-3">Popular Products:</h2>
     <div class="row g-3">
          @for (product of productList.slice(0,12); track product.id) {
             <div class="col-md-2">
             <div class="product p-2">
-                <img [src]="product.imageCover" alt="" class="w-100">
+                <div class="product-img">
+                 <img [src]="product.imageCover" [alt]="product.title">
+               </div>
                 <h3 class="h5 text-main">{{product.category.name}}</h3>
                 <h4 class="h6">{{product.title.split(" ",2).join(" ")}}</h4>
 

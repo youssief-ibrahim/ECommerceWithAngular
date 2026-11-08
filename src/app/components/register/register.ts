@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -13,10 +14,13 @@ import { AuthService } from '../../core/services/auth//auth-service';
 })
 export class Register {
 
+  
   private readonly _AuthService=inject(AuthService);
   private readonly _FormBuilder =inject(FormBuilder);
   private readonly _Router =inject(Router);
-  
+
+  registerSubscric!:Subscription;
+
   msMessage:string="";
   msSusses:boolean=false;
   isloading:boolean=false;
@@ -72,7 +76,7 @@ export class Register {
   if (this.registerForm.valid) {
 
     this.isloading=true;
-    this._AuthService.setRegisterForm(this.registerForm.value).subscribe({
+   this.registerSubscric= this._AuthService.setRegisterForm(this.registerForm.value).subscribe({
       next: (res) => {
         if(res.message=='success')
         {
@@ -102,5 +106,11 @@ export class Register {
   else {
     return { mismatch: true };
   }
+}
+
+ngOnDestroy(): void {
+  //Called once, before the instance is destroyed.
+  //Add 'implements OnDestroy' to the class.
+  this.registerSubscric?.unsubscribe();
 }
 }
