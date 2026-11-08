@@ -1,0 +1,161 @@
+<section class="bg-main-light shadow p-5 my-5 rounded-4">
+
+  <div class="register-header">
+    <div class="register-icon">
+      <i class="fas fa-user-plus"></i>
+    </div>
+
+    <h1>Create Account</h1>
+    <p>Join us today! Create your account to get started.</p>
+
+    @if (msSusses) {
+      <div class="success-message">
+        <i class="fas fa-check-circle"></i>
+        Account created successfully!
+      </div>
+    }
+  </div>
+
+  <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+
+    <div class="row g-3">
+
+      <!-- Name -->
+      <div class="col-md-6">
+        <label for="name">Full Name</label>
+        <input formControlName="name" id="name" type="text" class="form-control">
+
+        @if(registerForm.get('name')?.errors && (registerForm.get('name')?.touched || registerForm.get('name')?.dirty)) {
+          <div class="error-message">
+            @if(registerForm.get('name')?.getError('required')) {
+              Name is required
+            }
+            @else if(registerForm.get('name')?.getError('minlength')) {
+              Name should be at least 3 characters
+            }
+            @else if(registerForm.get('name')?.getError('maxlength')) {
+              Name should not exceed 20 characters
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Email -->
+      <div class="col-md-6">
+        <label for="email">Email Address</label>
+        <input formControlName="email" id="email" type="email" class="form-control">
+
+        @if(registerForm.get('email')?.errors && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)) {
+          <div class="error-message">
+            @if(registerForm.get('email')?.getError('required')) {
+              Email is required
+            }
+            @else if(registerForm.get('email')?.getError('email')) {
+              Please enter a valid email
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="col-md-6">
+        <label for="password">Password</label>
+
+        <div class="input-wrapper">
+          <input
+            formControlName="password"
+            id="password"
+            [type]="showPassword ? 'text' : 'password'"
+            class="form-control">
+
+          <i
+            [ngClass]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
+            (click)="showPassword = !showPassword">
+          </i>
+        </div>
+
+        @if(registerForm.get('password')?.errors && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)) {
+          <div class="error-message">
+            @if(registerForm.get('password')?.getError('required')) {
+              Password is required
+            }
+            @else if(registerForm.get('password')?.getError('pattern')) {
+              Password must be at least 6 characters
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="col-md-6">
+        <label for="rePassword">Confirm Password</label>
+
+        <div class="input-wrapper">
+          <input
+            formControlName="rePassword"
+            id="rePassword"
+            [type]="showRePassword ? 'text' : 'password'"
+            class="form-control">
+
+          <i
+            [ngClass]="showRePassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
+            (click)="showRePassword = !showRePassword">
+          </i>
+        </div>
+
+        @if(registerForm.get('rePassword')?.getError('required') && (registerForm.get('rePassword')?.touched || registerForm.get('rePassword')?.dirty)) {
+          <div class="error-message">
+            Confirm Password is required
+          </div>
+        }
+        @else if(registerForm.getError('mismatch') && (registerForm.get('rePassword')?.touched || registerForm.get('rePassword')?.dirty)) {
+          <div class="error-message">
+            Passwords do not match
+          </div>
+        }
+      </div>
+
+      <!-- Phone -->
+      <div class="col-12">
+        <label for="phone">Phone Number</label>
+        <input formControlName="phone" id="phone" type="tel" class="form-control">
+
+        @if(registerForm.get('phone')?.errors && (registerForm.get('phone')?.touched || registerForm.get('phone')?.dirty)) {
+          <div class="error-message">
+            @if(registerForm.get('phone')?.getError('required')) {
+              Phone number is required
+            }
+            @else if(registerForm.get('phone')?.getError('pattern')) {
+              Please enter a valid phone number
+            }
+          </div>
+        }
+      </div>
+
+    </div>
+
+    @if(msMessage) {
+      <div class="form-error">
+        <i class="fas fa-exclamation-circle"></i>
+        {{msMessage}}
+      </div>
+    }
+
+    <button [disabled]="isloading" type="submit" class="register-btn">
+      @if(isloading) {
+        Creating Account...
+        <i class="fas fa-spinner fa-spin"></i>
+      }
+      @else {
+        Create Account
+        <i class="fas fa-arrow-right"></i>
+      }
+    </button>
+
+    <p class="login-text">
+      Already have an account?
+      <a class="cr" routerLink="/login">Login</a>
+    </p>
+
+  </form>
+</section>

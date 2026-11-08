@@ -1,0 +1,94 @@
+<section class="bg-main-light shadow p-5 my-5 rounded-4">
+
+  <div class="register-header">
+    <div class="register-icon">
+      <i class="fas fa-sign-in"></i>
+    </div>
+
+    <h1>Welcome Back</h1>
+    <p>Login to your account and continue your journey.</p>
+
+    @if (msSusses) {
+      <div class="success-message">
+        <i class="fas fa-check-circle"></i>
+        Login successful!
+      </div>
+    }
+  </div>
+
+  <form [formGroup]="loginform" (ngSubmit)="submitForm()">
+
+    <div class="row g-3">
+
+      <!-- Email -->
+      <div class="col-12">
+        <label for="email">Email Address</label>
+
+        <input formControlName="email" id="email" type="email"
+          class="form-control">
+
+        @if(loginform.get('email')?.errors && loginform.get('email')?.touched) {
+          <div class="error-message">
+            @if(loginform.get('email')?.getError('required')) {
+              Email is required
+            }
+            @else if(loginform.get('email')?.getError('email')) {
+              Please enter a valid email
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="col-12">
+        <label for="password">Password</label>
+
+        <div class="input-wrapper">
+          <input formControlName="password" id="password"
+            [type]="showPassword?'text':'password'"
+            class="form-control">
+
+          <i [ngClass]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
+            (click)="showPassword = !showPassword">
+          </i>
+        </div>
+
+        @if(loginform.get('password')?.errors && loginform.get('password')?.touched) {
+          <div class="error-message">
+            @if(loginform.get('password')?.getError('required')) {
+              Password is required
+            }
+            @else if(loginform.get('password')?.getError('pattern')) {
+              Password must be at least 6 characters
+            }
+          </div>
+        }
+      </div>
+
+    </div>
+
+    @if(msMessage) {
+      <div class="form-error">
+        <i class="fas fa-exclamation-circle"></i>
+        {{msMessage}}
+      </div>
+    }
+
+    <button [disabled]="isloading" type="submit" class="register-btn">
+      @if(isloading) {
+        Logging in...
+        <i class="fas fa-spinner fa-spin"></i>
+      }
+      @else {
+        Login
+        <i class="fas fa-arrow-right"></i>
+      }
+    </button>
+
+    <p class="login-text">
+      Don't have an account?
+      <a class="cr" routerLink="/register">Create Account</a>
+    </p>
+
+  </form>
+</section>

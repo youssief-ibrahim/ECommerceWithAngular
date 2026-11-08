@@ -1,0 +1,34 @@
+<section>
+    <h2>Popular Products:</h2>
+    <div class="row g-3">
+         @for (product of productList.slice(0,12); track product.id) {
+            <div class="col-md-2">
+            <div class="product p-2">
+                <img [src]="product.imageCover" alt="" class="w-100">
+                <h3 class="h5 text-main">{{product.category.name}}</h3>
+                <h4 class="h6">{{product.title.split(" ",2).join(" ")}}</h4>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>{{product.price}} EGP</span>
+                    <div>
+                            @for (num of [1,2,3,4,5].slice(0, product.ratingsAverage); track $index) {
+                                <span>
+                                <i class="fas fa-star rating-color"></i>
+                                </span>
+                            }
+
+                            @if (product.ratingsAverage % 1 !== 0) {
+                                <i class="fa-solid fa-star-half-stroke rating-color"></i>
+                            }
+
+                            <span class="text-muted">{{product.ratingsAverage}}</span>
+                    </div>
+                </div>
+
+                <button class="btn-main w-100">Add to Carr</button>
+            </div>
+        </div>
+         }
+    </div>
+</section>
+
