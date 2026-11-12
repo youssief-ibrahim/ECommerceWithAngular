@@ -1,9 +1,59 @@
-<section>
-    <h2 class="m-3">Popular Products:</h2>
+
+ <section class="mainSlider">
+   <div class="row g-0">
+    <div class="col-md-10 ">
+    <div>  
+     <owl-carousel-o [options]="customOptionsMain">
+        <ng-template carouselSlide  >
+          <img src="images/slider-image-1.jpeg"   height="400px" class="w-100">
+      </ng-template>
+        <ng-template carouselSlide  >
+          <img src="images/slider-image-2.jpeg"   height="400px" class="w-100">
+      </ng-template>
+        <ng-template carouselSlide >
+          <img src="images/slider-image-3.jpeg"   height="400px" class="w-100">
+      </ng-template>
+    </owl-carousel-o>
+    </div>
+   </div>
+   <div class="col-md-2 ">
+       <div>
+         <img src="images/grocery-banner.png" alt="" height="200px" class="w-100">
+         <img src="images/grocery-banner-2.jpeg" alt="" height="200px" class="w-100">
+        <img src="" alt="">
+       </div>
+    </div>
+   </div>
+ </section>
+
+
+
+<section class="SCaregory container my-2">
+  <h2>Popular Category:</h2>
+
+ @if (categorytList.length > 0) {
+ <owl-carousel-o [options]="customOptionscat">
+
+    @for (cat of categorytList; track cat._id) {
+      <ng-template carouselSlide >
+       <div class="product itemslid border border-secondary border-1  rounded-2 mx-1 ">
+        <img [src]="cat.image"  [alt]="cat.name" height="300px" class="w-100 d-block mx-auto">
+        <h3 class="mt-3 h6 text-main text-center">{{ cat.name }}</h3>
+       </div>
+      </ng-template>
+    }
+
+  </owl-carousel-o>
+ }
+</section>
+
+<section class="SProduct container my-2">
+    <h2 >Popular Products:</h2>
     <div class="row g-3">
          @for (product of productList.slice(0,12); track product.id) {
-            <div class="col-md-2">
+            <div class="col-md-4 col-lg-3 ">
             <div class="product p-2">
+                <div [routerLink]="['/detalis',product.id]">
                 <div class="product-img">
                  <img [src]="product.imageCover" [alt]="product.title">
                </div>
@@ -26,7 +76,7 @@
                             <span class="text-muted">{{product.ratingsAverage}}</span>
                     </div>
                 </div>
-
+              </div>
                 <button class="btn-main w-100">Add to Carr</button>
             </div>
         </div>
@@ -34,3 +84,4 @@
     </div>
 </section>
 
+ 

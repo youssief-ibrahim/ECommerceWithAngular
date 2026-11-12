@@ -32,4 +32,14 @@ export class AuthService {
     //call api End Point to rempve token from backend 
     this._Router.navigate(["/login"]);
   }
+  setEmailverify(data:object):Observable<any>{
+   return this._HttpClient.post(`${environment.baseUrl}/api/v1/auth/forgotPasswords`,data)
+  }
+  setCodeverify(data:object):Observable<any>{
+   return this._HttpClient.post(`${environment.baseUrl}/api/v1/auth/verifyResetCode`,data)
+  }
+  setResetPassword(data:object):Observable<any>{
+   return this._HttpClient.put(`${environment.baseUrl}/api/v1/auth/resetPassword`,data)
+  }
+
 }

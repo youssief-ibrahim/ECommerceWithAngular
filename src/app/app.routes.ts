@@ -11,13 +11,16 @@ import { Brands } from './components/brands/brands';
 import { Categories } from './components/categories/categories';
 import { authGuard } from './core/guards/auth-guard';
 import { logedGuard } from './core/guards/loged-guard';
+import { Detalis } from './components/detalis/detalis';
+import { ForgetPassword } from './components/forget-password/forget-password';
 
 export const routes: Routes = [
   { path: '', component: AuthLayout,canActivate:[logedGuard],
     children:[
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: Login,title:'login' },
-      { path: 'register', component: Register,title:"register" }
+      { path: 'register', component: Register,title:"register" },
+      { path: 'forgetPassword', component: ForgetPassword,title:"forgetPassword" }
     ] 
 },
 
@@ -28,7 +31,8 @@ export const routes: Routes = [
       { path: 'products', component: Product,title:"products" },
       { path: 'cart', component: Cart,title:"cart" },
       { path: 'brands', component: Brands,title:"brands" },
-      { path: 'categories', component: Categories,title:"categories" }
+      { path: 'categories', component: Categories,title:"categories" },
+      { path: 'detalis/:id', component: Detalis,title:"detalis" },
     ] 
 },
 
