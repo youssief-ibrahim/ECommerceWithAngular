@@ -7,10 +7,15 @@ import { CategoryService } from '../../core/services/category/category-service';
 import { ICategory } from '../../core/interfaces/icategory';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { TermTextPipe } from '../../core/pipes/term-text-pipe';
+import { SearchTextPipe } from '../../core/pipes/search-text-pipe';
+import { FormsModule } from '@angular/forms';
+import { CartService } from '../../core/services/cart/cart-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
-  imports: [CarouselModule, CommonModule, RouterLink],
+  imports: [CarouselModule, CommonModule, RouterLink,TermTextPipe,SearchTextPipe,FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -19,9 +24,12 @@ export class Home implements OnInit,OnDestroy{
     categorytList:ICategory[]=[];
    getAllProductSubscrib!:Subscription;
    getAllCategoriesSubscrib!:Subscription;
-  _ProductService=inject(ProductService);
-  _CategoryService=inject(CategoryService);
-
+   text:string="";
+  private readonly _ProductService=inject(ProductService);
+  private readonly  _CategoryService=inject(CategoryService);
+  private readonly  _CartService=inject(CartService);
+  private readonly _ToastrService = inject(ToastrService);
+  
 customOptionscat: OwlOptions = {
   loop: true,
   autoplay: true,
@@ -77,7 +85,6 @@ customOptionsMain: OwlOptions = {
     //Add 'implements OnInit' to the class.
   this.getAllCategoriesSubscrib= this._CategoryService.getAllCategories().subscribe({
       next:(res)=> {
-        console.log(res.data[0]);
         this.categorytList=res.data;
       },
       error:(err)=> {
@@ -94,6 +101,16 @@ customOptionsMain: OwlOptions = {
       },
     });
 
+  }
+  addToCart(id:string):void{
+   this._CartService.addProductToCart(id).subscribe({
+    next:(value)=> {
+      this._ToastrService.success(value.message.split(" ",3).join(" "));
+    },
+    error:(err)=> {
+      console.log(err)
+    },
+   })
   }
   ngOnDestroy(): void {
     this.getAllProductSubscrib?.unsubscribe();

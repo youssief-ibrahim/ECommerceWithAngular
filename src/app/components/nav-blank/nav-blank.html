@@ -20,12 +20,16 @@
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active-link" routerLink="brands">Brands</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active-link" routerLink="cart">Cart</a>
-        </li>
+        
       </ul>
 
+
       <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active-link" routerLink="cart">
+            <i class="fas fa-cart-arrow-down"></i>
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" >
             <i class="fa-brands fa-facebook"></i>
@@ -46,7 +50,9 @@
             <i class="fa-brands fa-linkedin"></i>
           </a>
         </li>
-        <li class="nav-item">
+
+
+        <li class="nav-item ">
           <a class="nav-link cr" (click)="this._AuthService.logOut()">
             SingOut
           </a>
