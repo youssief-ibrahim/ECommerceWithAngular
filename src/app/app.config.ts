@@ -1,10 +1,11 @@
+import { headerInterceptor } from './core/interceptors/header-interceptor';
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withInMemoryScrolling, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideToastr } from 'ngx-toastr';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,7 +15,7 @@ export const appConfig: ApplicationConfig = {
       // withInMemoryScrolling({scrollPositionRestoration:"top"}),
        withViewTransitions()),
         provideClientHydration(withEventReplay()),
-        provideHttpClient(withFetch()),
+        provideHttpClient(withFetch(),withInterceptors([headerInterceptor])),
         provideToastr(),
   ]
 };

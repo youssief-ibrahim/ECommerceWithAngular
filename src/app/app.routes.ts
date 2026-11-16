@@ -13,6 +13,8 @@ import { authGuard } from './core/guards/auth-guard';
 import { logedGuard } from './core/guards/loged-guard';
 import { Detalis } from './components/detalis/detalis';
 import { ForgetPassword } from './components/forget-password/forget-password';
+import { Allorders } from './components/allorders/allorders';
+import { Orders } from './components/orders/orders';
 
 export const routes: Routes = [
   { path: '', component: AuthLayout,canActivate:[logedGuard],
@@ -33,7 +35,9 @@ export const routes: Routes = [
       { path: 'brands', component: Brands,title:"brands" },
       { path: 'categories', component: Categories,title:"categories" },
       { path: 'detalis/:id', component: Detalis,title:"detalis" },
-    ] 
+      { path: 'allorders', component:Allorders,title:"allOrders" },
+      { path: 'orders/:id', component:Orders,title:"orders" }
+    ]  
 },
 
   { path: '**', component: Notfound , title:"Notfound"}

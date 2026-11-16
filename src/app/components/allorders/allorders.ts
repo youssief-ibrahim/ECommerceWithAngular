@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-allorders',
@@ -6,4 +8,6 @@ import { Component } from '@angular/core';
   templateUrl: './allorders.html',
   styleUrl: './allorders.scss',
 })
-export class Allorders {}
+export class Allorders {
+
+}
