@@ -12,6 +12,7 @@ import { SearchTextPipe } from '../../core/pipes/search-text-pipe';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../core/services/cart/cart-service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +30,7 @@ export class Home implements OnInit,OnDestroy{
   private readonly  _CategoryService=inject(CategoryService);
   private readonly  _CartService=inject(CartService);
   private readonly _ToastrService = inject(ToastrService);
+  private readonly _NgxSpinnerService = inject(NgxSpinnerService);
   
 customOptionscat: OwlOptions = {
   loop: true,
@@ -43,7 +45,7 @@ customOptionscat: OwlOptions = {
 
   dots: true,
   nav: false,
-
+  rtl:true,
   responsive: {
     0: {
       items: 1
@@ -65,14 +67,14 @@ customOptionsMain: OwlOptions = {
   autoplayTimeout: 2500,
   autoplaySpeed: 1000,
   autoplayHoverPause: true,
-
+  
   mouseDrag: true,
   touchDrag: false,
   pullDrag: false,
 
   dots: true,
   nav: false,
-
+  rtl:true,
   responsive: {
       0: {
       items: 1
@@ -83,22 +85,17 @@ customOptionsMain: OwlOptions = {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+  
   this.getAllCategoriesSubscrib= this._CategoryService.getAllCategories().subscribe({
       next:(res)=> {
         this.categorytList=res.data;
-      },
-      error:(err)=> {
-        console.log(err)
-      },
+      }
     });
 
    this.getAllProductSubscrib= this._ProductService.getAllProducts().subscribe({
       next:(res)=> {
         this.productList=res.data;
-      },
-      error:(err)=> {
-        console.log(err)
-      },
+      }
     });
 
   }
@@ -106,10 +103,7 @@ customOptionsMain: OwlOptions = {
    this._CartService.addProductToCart(id).subscribe({
     next:(value)=> {
       this._ToastrService.success(value.message.split(" ",3).join(" "));
-    },
-    error:(err)=> {
-      console.log(err)
-    },
+    }
    })
   }
   ngOnDestroy(): void {

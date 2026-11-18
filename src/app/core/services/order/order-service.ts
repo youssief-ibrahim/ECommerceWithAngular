@@ -10,7 +10,6 @@ import { AuthService } from '../auth/auth-service';
 export class OrderService {
   constructor(private readonly _HttpClient:HttpClient,private readonly _AuthService:AuthService) { };
 
-myHeaders:any = {token : localStorage.getItem('userToken')};
 
 
 checkOut(idCart:string|null , shippingDetails:object):Observable<any> {

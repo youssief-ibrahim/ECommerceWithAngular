@@ -35,10 +35,7 @@ verifyEmailSubmit():void{
     if(value.statusMsg=="success"){
       this.step=2;
     }
-  },
-  error:(err)=> {
-    console.log(err);
-  },
+  }
  })
 }
 verifyCodeSubmit():void{
@@ -50,10 +47,7 @@ verifyCodeSubmit():void{
       this.step=3;
     }
 
-  },
-  error:(err)=> {
-    console.log(err);
-  },
+  }
  })
 
 }
@@ -66,10 +60,7 @@ verifyRestPasswordSubmit():void{
 
     this._AuthService.saveUserData();
     this._Router.navigate(["/home"]);
-  },
-  error:(err)=> {
-    console.log(err);
-  },
+  }
  })
 }
 }

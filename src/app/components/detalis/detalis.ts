@@ -22,10 +22,7 @@ export class Detalis implements OnInit{
       this._ProductService.getSpecificProducts(id).subscribe({
         next:(res)=> {
           this.productDetalis=res.data;
-        },
-        error:(err)=> {
-          console.log(err);
-        },
+        }
       });
     },
    })

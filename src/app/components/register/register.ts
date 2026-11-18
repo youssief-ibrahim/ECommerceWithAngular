@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { AuthService } from '../../core/services/auth//auth-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -18,11 +19,11 @@ export class Register {
   private readonly _AuthService=inject(AuthService);
   private readonly _FormBuilder =inject(FormBuilder);
   private readonly _Router =inject(Router);
+   private readonly _ToastrService =inject(ToastrService);
 
   registerSubscric!:Subscription;
 
-  msMessage:string="";
-  msSusses:boolean=false;
+
   isloading:boolean=false;
   showPassword: boolean = false;
   showRePassword: boolean = false;
@@ -80,7 +81,8 @@ export class Register {
       next: (res) => {
         if(res.message=='success')
         {
-          this.msSusses=true;
+          // this.msSusses=true;
+          this._ToastrService.success("Account Created Sussfuly");
           setTimeout(() => {
             this._Router.navigate(['/login'])
           }, 1500);
@@ -88,7 +90,6 @@ export class Register {
         this.isloading=false;
       },
       error: (err:HttpErrorResponse) => {
-        this.msMessage=err.error.message;
         this.isloading=false;
       }
     });

@@ -4,6 +4,8 @@ import { Icart } from '../../core/interfaces/icart';
 import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2'; 
+import { NgxSpinnerService } from 'ngx-spinner';
+import { PlatformService } from '../../core/services/platformservice/platform-service';
 
 @Component({
   selector: 'app-cart',
@@ -13,36 +15,35 @@ import Swal from 'sweetalert2';
 })
 export class Cart implements OnInit{
   private readonly _CartService=inject(CartService);
+  private readonly _NgxSpinnerService = inject(NgxSpinnerService);
+  private readonly _PlatformService = inject(PlatformService);
 
-  cartListProduct:Icart={} as Icart;
- ngOnInit(): void {
-   this._CartService.getProductOfCartt().subscribe({
-    next:(value)=> {
-      this.cartListProduct=value.data;      // totalPrice , products
-    },
-    error:(err)=> {
-      console.log(err)
-    },
-   })
- }
+cartListProduct:Icart={} as Icart;
+isLoading: boolean = true;
+isCartCleared: boolean = false;
+ngOnInit(): void {
+
+  if (this._PlatformService.isBrowser()) {
+    this._CartService.getProductOfCartt().subscribe({
+      next: (value) => {
+        this.cartListProduct = value.data;
+        this.isLoading = false;
+      }
+    });
+  }
+}
  removeItem(id:string):void{
   this._CartService.removeSpacidiProduct(id).subscribe({
     next:(value)=> {
        this.cartListProduct=value.data; 
-    },
-    error:(err)=> {
-      console.log(err)
-    },
+    }
    })
  }
  UpdateItem(id:string,countnum:number):void{
   this._CartService.updateProductQuintity(id,countnum).subscribe({
     next:(value)=> {
        this.cartListProduct=value.data; 
-    },
-    error:(err)=> {
-      console.log(err)
-    },
+    }
    })
  }
 //  clearCart():void{
@@ -60,6 +61,7 @@ export class Cart implements OnInit{
 //  }
 
 clearCart(): void {
+  if (!this._PlatformService.isBrowser()) return;
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -77,15 +79,14 @@ clearCart(): void {
         next: (value) => {
 
           if (value.message === "success") {
-
+            this.isLoading=false;
+            this.isCartCleared=true;
             this.cartListProduct = {} as Icart;
-
             Swal.fire({
               title: "Deleted!",
               text: "Your cart has been cleared successfully.",
               icon: "success"
             });
-
           }
 
         },

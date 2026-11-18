@@ -7,13 +7,7 @@
 
     <h1>Create Account</h1>
     <p>Join us today! Create your account to get started.</p>
-
-    @if (msSusses) {
-      <div class="success-message">
-        <i class="fas fa-check-circle"></i>
-        Account created successfully!
-      </div>
-    }
+    
   </div>
 
   <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
@@ -133,13 +127,6 @@
       </div>
 
     </div>
-
-    @if(msMessage) {
-      <div class="form-error">
-        <i class="fas fa-exclamation-circle"></i>
-        {{msMessage}}
-      </div>
-    }
 
     <button [disabled]="isloading" type="submit" class="register-btn">
       @if(isloading) {

@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { AuthService } from '../../core/services/auth//auth-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +18,9 @@ export class Login {
   
   private readonly _AuthService=inject(AuthService);
   private readonly _FormBuilder =inject(FormBuilder);
+  private readonly _ToastrService =inject(ToastrService);
   private readonly _Router =inject(Router);
   loginSubscribe!:Subscription
-  msMessage:string="";
   msSusses:boolean=false;
   isloading:boolean=false;
   showPassword: boolean = false;
@@ -43,7 +44,7 @@ export class Login {
       next: (res) => {
         if(res.message=='success')
         {
-          this.msSusses=true;
+          this._ToastrService.success("Login Successfuly");
           setTimeout(() => {
             localStorage.setItem("userToken",res.token);
             this._AuthService.saveUserData();
@@ -54,7 +55,6 @@ export class Login {
         this.isloading=false;
       },
       error: (err:HttpErrorResponse) => {
-        this.msMessage=err.error.message;
         this.isloading=false;
       }
     });
