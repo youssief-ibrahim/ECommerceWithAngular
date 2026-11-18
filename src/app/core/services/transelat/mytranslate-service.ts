@@ -14,7 +14,6 @@ export class MytranslateService {
     let savedLang = localStorage.getItem('lang');
     if (savedLang !== 'ar' && savedLang !== 'en') {
        savedLang = 'en';
-       localStorage.setItem("lang",savedLang)
     }
     this._TranslateService.use(savedLang!);
     this.changeDirection();

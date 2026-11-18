@@ -6,6 +6,17 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script>
+    (function () {
+      let savedLang = localStorage.getItem('lang');
+      const lang = savedLang === 'ar' || savedLang === 'en'
+        ? savedLang
+        : 'en';
+
+      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+      document.documentElement.setAttribute('lang', lang);
+    })();
+  </script>
 </head>
 <body>
   <app-root></app-root>

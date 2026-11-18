@@ -5,6 +5,9 @@
     "categories": "Categories",
     "brands": "Brands",
     "signout": "SignOut",
-    "lang":"EN"
+    "lang": "EN",
+    "login": "Login",
+    "register": "Register",
+    "cart": "Cart"
   }
 }

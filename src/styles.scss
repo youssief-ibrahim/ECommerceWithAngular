@@ -78,3 +78,44 @@ a:hover {
 .btn-main:hover {
   background-color: #11bd11;
 }
+
+/* ============================
+   RTL / LTR Support
+   ============================ */
+
+/* Arabic font for RTL */
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap");
+
+html[dir="rtl"] body {
+  font-family: "Cairo", sans-serif !important;
+}
+
+/* Fix Bootstrap navbar for RTL */
+html[dir="rtl"] .navbar-nav {
+  padding-right: 0;
+}
+
+html[dir="rtl"] .ms-auto {
+  margin-right: auto !important;
+  margin-left: unset !important;
+}
+
+html[dir="rtl"] .me-auto {
+  margin-left: auto !important;
+  margin-right: unset !important;
+}
+
+/* Fix Bootstrap margins/paddings for RTL */
+html[dir="rtl"] .ms-1, html[dir="rtl"] .ms-2, html[dir="rtl"] .ms-3, html[dir="rtl"] .ms-4, html[dir="rtl"] .ms-5 {
+  margin-right: inherit;
+  margin-left: 0 !important;
+}
+
+html[dir="rtl"] .dropdown-menu {
+  text-align: right;
+}
+
+/* Smooth transition for direction change */
+body {
+  transition: direction 0s;
+}
