@@ -1,5 +1,5 @@
 import { TranslateService } from '@ngx-translate/core';
-import { inject, Injectable, RendererFactory2 } from '@angular/core';
+import { inject, Injectable, OnInit, RendererFactory2 } from '@angular/core';
 import { PlatformService } from '../platformservice/platform-service';
 @Injectable({
   providedIn: 'root',

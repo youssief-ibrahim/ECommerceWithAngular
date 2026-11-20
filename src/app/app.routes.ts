@@ -30,8 +30,8 @@ export const routes: Routes = [
     children:[
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: Home,title:"home" },
-      { path: 'products', component: Product,title:"products" },
-      { path: 'cart', component: Cart,title:"cart" },
+       {path: 'products',loadComponent: () =>import('./components/product/product').then(c => c.Product),title: 'products'},
+      { path: 'cart', loadComponent: () =>import('./components/cart/cart').then(c =>c.Cart),title:"cart" },
       { path: 'brands', component: Brands,title:"brands" },
       { path: 'categories', component: Categories,title:"categories" },
       { path: 'detalis/:id', component: Detalis,title:"detalis" },

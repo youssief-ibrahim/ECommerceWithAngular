@@ -103,6 +103,7 @@ customOptionsMain: OwlOptions = {
    this._CartService.addProductToCart(id).subscribe({
     next:(value)=> {
       this._ToastrService.success(value.message.split(" ",3).join(" "));
+      this._CartService.cartNumber.set(value.numOfCartItems);
     }
    })
   }

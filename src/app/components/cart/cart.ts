@@ -4,7 +4,6 @@ import { Icart } from '../../core/interfaces/icart';
 import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2'; 
-import { NgxSpinnerService } from 'ngx-spinner';
 import { PlatformService } from '../../core/services/platformservice/platform-service';
 
 @Component({
@@ -15,8 +14,8 @@ import { PlatformService } from '../../core/services/platformservice/platform-se
 })
 export class Cart implements OnInit{
   private readonly _CartService=inject(CartService);
-  private readonly _NgxSpinnerService = inject(NgxSpinnerService);
   private readonly _PlatformService = inject(PlatformService);
+
 
 cartListProduct:Icart={} as Icart;
 isLoading: boolean = true;
@@ -36,13 +35,20 @@ ngOnInit(): void {
   this._CartService.removeSpacidiProduct(id).subscribe({
     next:(value)=> {
        this.cartListProduct=value.data; 
+       this._CartService.cartNumber.set(value.numOfCartItems);
     }
    })
  }
  UpdateItem(id:string,countnum:number):void{
   this._CartService.updateProductQuintity(id,countnum).subscribe({
     next:(value)=> {
-       this.cartListProduct=value.data; 
+       this.cartListProduct=value.data;
+        this._CartService.getProductOfCartt().subscribe({
+      next: (res) => {
+        // console.log('cart items ', res);
+        this._CartService.cartNumber.set(res.numOfCartItems);
+      }
+    }); 
     }
    })
  }
@@ -82,6 +88,7 @@ clearCart(): void {
             this.isLoading=false;
             this.isCartCleared=true;
             this.cartListProduct = {} as Icart;
+            this._CartService.cartNumber.set(0);
             Swal.fire({
               title: "Deleted!",
               text: "Your cart has been cleared successfully.",

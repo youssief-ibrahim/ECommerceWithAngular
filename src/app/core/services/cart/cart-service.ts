@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, WritableSignal, inject, signal } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+
+  cartNumber: WritableSignal<number>=signal(0);  //ornull
+
   _HttpClient=inject(HttpClient)
   addProductToCart(id:string):Observable<any>{
     return this._HttpClient.post(`${environment.baseUrl}/api/v1/cart`,

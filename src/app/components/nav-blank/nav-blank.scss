@@ -1,0 +1,9 @@
+:host-context([dir="rtl"]) .ar-home-space{
+  margin-right: -1rem;
+}
+
+:host {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
